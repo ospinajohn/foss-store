@@ -1,7 +1,11 @@
 import express from 'express';
-
-// el archivo app es el que se encarga de inicializar el servidor y de configurar las rutas de la API
+import productsRouter from './routes/products.routes.js';
 
 const app = express();
+
+app.use(express.json()); 
+
+// Rutas de la API
+app.use('/api', productsRouter); 
 
 export default app;
