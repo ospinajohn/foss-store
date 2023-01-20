@@ -1,7 +1,6 @@
-// El modelo es el encargado de la lógica de negocio de la aplicación y de la comunicación con la base de datos, que en este caso es MongoDB. Que se se quiere decir con logica de negocio, esto se refiere a que el modelo es el encargado de realizar las validaciones de los datos, de realizar las consultas a la base de datos, de realizar las inserciones, actualizaciones y eliminaciones de los datos, etc.
 import mongoose from 'mongoose';
 
-const productSchema = new mongoose.Schema({ // Se crea el esquema del modelo de producto con el método Schema de mongoose y se le pasa un objeto con las propiedades que va a tener el modelo 
+const productSchema = new mongoose.Schema({
 	nombre: {
 		type: String,
 		required: [true, 'Por favor ingrese el nombre del producto'],
@@ -14,7 +13,7 @@ const productSchema = new mongoose.Schema({ // Se crea el esquema del modelo de 
 	precio: {
 		type: Number,
 		required: [true, 'Por favor ingrese el precio del producto'],
-		maxLength: [5, 'El precio del producto no puede tener más de 5 caracteres'],
+		maxLength: [8, 'El precio del producto no puede tener más de 5 caracteres'],
 		default: 0.0,
 	},
 	descripcion: {
@@ -33,6 +32,13 @@ const productSchema = new mongoose.Schema({ // Se crea el esquema del modelo de 
 			},
 		},
 	],
+	genero: {
+		type: String,
+		required: [true, 'Por favor ingrese el género del producto'],
+		enum: {
+			values: ['Hombre', 'Mujer', 'Niño', 'Niña'],
+		},
+	},
 	categoria: {
 		type: String,
 		required: [true, 'Por favor ingrese la categoría del producto'],
@@ -41,15 +47,11 @@ const productSchema = new mongoose.Schema({ // Se crea el esquema del modelo de 
 		},
 	},
 	stock: {
+		// se puede crear un array de tallas y stock para poder registrarlo por talllas y no por producto
 		type: Number,
 		required: [true, 'Por favor ingrese la cantidad en stock'],
 		maxLength: [5, 'El stock del producto no puede tener más de 5 caracteres'],
 		default: 0,
-	},
-	user: { 
-		type: mongoose.Schema.ObjectId,
-		ref: 'User',
-		required: true,
 	},
 	createdAt: {
 		type: Date,
@@ -57,4 +59,4 @@ const productSchema = new mongoose.Schema({ // Se crea el esquema del modelo de 
 	},
 });
 
-export default mongoose.model('Product', productSchema); 
+export default mongoose.model('Products', productSchema);
