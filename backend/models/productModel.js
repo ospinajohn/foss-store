@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema({
 		type: String,
 		required: [true, 'Por favor ingrese el género del producto'],
 		enum: {
-			values: ['Hombre', 'Mujer', 'Niño', 'Niña'],
+			values: ['Hombre', 'Mujer'],
 		},
 	},
 	categoria: {
@@ -46,13 +46,38 @@ const productSchema = new mongoose.Schema({
 			values: ['Camisetas', 'Pantalones', 'Camisas', 'Sudaderas', 'Jeans'],
 		},
 	},
-	stock: {
-		// se puede crear un array de tallas y stock para poder registrarlo por talllas y no por producto
-		type: Number,
-		required: [true, 'Por favor ingrese la cantidad en stock'],
-		maxLength: [5, 'El stock del producto no puede tener más de 5 caracteres'],
-		default: 0,
-	},
+	tallas: [
+		{
+			talla: {
+				type: String,
+				required: [true, 'Por favor ingrese la talla del producto'],
+				enum: {
+					values: [
+						'S',
+						'M',
+						'L',
+						'XL',
+						'30',
+						'32',
+						'34',
+						'36',
+						'38',
+						'40',
+						'42',
+						'44',
+						'46',
+						'48',
+						'50',
+					],
+				},
+			},
+			cantidad: {
+				type: Number,
+				required: [true, 'Por favor ingrese la cantidad del producto'],
+				default: 0,
+			},
+		},
+	],
 	createdAt: {
 		type: Date,
 		default: Date.now,

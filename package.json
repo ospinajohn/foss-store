@@ -1,13 +1,13 @@
 {
 	"name": "foss-store",
 	"version": "1.0.0",
-	"description": "Tienda viertual de ropa",
+	"description": "Tienda virtual de ropa",
 	"type": "module",
 	"main": "server.js",
 	"scripts": {
-    "start": "node backend/server.js",
-    "dev": "SET NODE_ENV=development & nodemon backend/server.js",
-    "prod": "SET NODE_ENV=production & node backend/server.js"
+		"serve": "node backend/server.js",
+		"dev": "SET NODE_ENV=development & nodemon backend/server.js",
+		"prod": "SET NODE_ENV=production & node backend/server.js"
 	},
 	"author": "John James",
 	"license": "ISC",

@@ -3,10 +3,10 @@ import productModel from '../models/productModel.js';
 
 // Obtener todos los productos
 export const getProducts = catchAsyncErrors(async (req, res) => {
-	const products = await productModel.find(); 
+	const products = await productModel.find();
 	res.status(200).json({
-		success: true, 
-		count: products.length, 
+		success: true,
+		count: products.length,
 		data: products,
 	});
 });
@@ -22,8 +22,8 @@ export const newProduct = catchAsyncErrors(async (req, res) => {
 
 // Obtener un producto por ID
 export const getProductById = catchAsyncErrors(async (req, res) => {
-	const product = await productModel.findById(req.params.id); // req.params.id es el ID que se le pasa por la URL en el endpoint
-	if (!product) { // Si no encuentra el producto por el ID que se le pasa
+	const product = await productModel.findById(req.params.id);
+	if (!product) {
 		return next(new ErrorHandler('Producto no encontrado', 404));
 	}
 	res.status(200).json({
@@ -38,10 +38,10 @@ export const updateProduct = catchAsyncErrors(async (req, res, next) => {
 	if (!product) {
 		return next(new ErrorHandler('Producto no encontrado', 404));
 	}
-	product = await productModel.findByIdAndUpdate(req.params.id, req.body, { 
-		new: true, 
-		runValidators: true, 
-		useFindAndModify: false, 
+	product = await productModel.findByIdAndUpdate(req.params.id, req.body, {
+		new: true,
+		runValidators: true,
+		useFindAndModify: false,
 	});
 	res.status(200).json({
 		success: true,
@@ -52,7 +52,8 @@ export const updateProduct = catchAsyncErrors(async (req, res, next) => {
 // Eliminar un producto por ID
 export const deleteProduct = catchAsyncErrors(async (req, res, next) => {
 	const product = await productModel.findById(req.params.id);
-	if (!product) { // Si no encuentra el producto por el ID que se le pasa en la URL
+	if (!product) {
+		// Si no encuentra el producto por el ID que se le pasa en la URL
 		return next(new ErrorHandler('Producto no encontrado', 404));
 	}
 	await product.remove(); // Elimina el producto
