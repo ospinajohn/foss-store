@@ -6,8 +6,8 @@
 	"main": "server.js",
 	"scripts": {
 		"serve": "node backend/server.js",
-		"dev": "SET NODE_ENV=development & nodemon backend/server.js",
-		"prod": "SET NODE_ENV=production & node backend/server.js"
+		"dev": "SET NODE_ENV=DEVELOPMENT & nodemon backend/server.js",
+		"prod": "SET NODE_ENV=PRODUCTION & node backend/server.js"
 	},
 	"author": "John James",
 	"license": "ISC",

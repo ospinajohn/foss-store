@@ -1,18 +1,18 @@
 import catchAsyncErrors from '../middlewares/catchAsyncErrors.js';
 import productModel from '../models/productModel.js';
+import ErrorHandler from '../utils/errorHandler.js';
 
 // Obtener todos los productos
-export const getProducts = catchAsyncErrors(async (req, res) => {
+export const getProducts = catchAsyncErrors(async (req, res, next) => {
 	const products = await productModel.find();
 	res.status(200).json({
 		success: true,
-		count: products.length,
 		data: products,
 	});
 });
 
 // Crear producto
-export const newProduct = catchAsyncErrors(async (req, res) => {
+export const newProduct = catchAsyncErrors(async (req, res, next) => {
 	const product = await productModel.create(req.body);
 	res.status(201).json({
 		success: true,
@@ -21,11 +21,13 @@ export const newProduct = catchAsyncErrors(async (req, res) => {
 });
 
 // Obtener un producto por ID
-export const getProductById = catchAsyncErrors(async (req, res) => {
+export const getProductById = catchAsyncErrors(async (req, res, next) => {
 	const product = await productModel.findById(req.params.id);
 	if (!product) {
+		// Si no encuentra el producto por el ID que se le pasa en la URL
 		return next(new ErrorHandler('Producto no encontrado', 404));
 	}
+
 	res.status(200).json({
 		success: true,
 		data: product,
@@ -35,6 +37,7 @@ export const getProductById = catchAsyncErrors(async (req, res) => {
 // Actualizar un producto por ID
 export const updateProduct = catchAsyncErrors(async (req, res, next) => {
 	let product = await productModel.findById(req.params.id);
+
 	if (!product) {
 		return next(new ErrorHandler('Producto no encontrado', 404));
 	}
