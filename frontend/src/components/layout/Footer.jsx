@@ -27,7 +27,7 @@ export default function Footer() {
 							alignItems={'center'}
 							justifyContent={'center'}
 							w={6}
-							h={6}
+							h={4}
 							rounded={'full'}
 							bg={useColorModeValue('gray.200', 'gray.700')}
 							_hover={{ bg: useColorModeValue('gray.300', 'gray.600') }}>
