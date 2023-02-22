@@ -43,7 +43,7 @@ const productSchema = new mongoose.Schema({
 		type: String,
 		required: [true, 'Por favor ingrese la categoría del producto'],
 		enum: {
-			values: ['Camisetas', 'Pantalones', 'Camisas', 'Sudaderas', 'Jeans'],
+			values: ['Camisetas', 'Pantalones', 'Camisas', 'Sudaderas', 'Jeans', 'Bermudas'],
 		},
 	},
 	tallas: [

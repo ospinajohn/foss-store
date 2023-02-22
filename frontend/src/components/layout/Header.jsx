@@ -77,15 +77,15 @@ export default function Header() {
 									marginLeft: '12px',
 								}}
 							/>
-							<div class='search'>
-								<div class='search_group group'>
+							<div className='search'>
+								<div className='search_group group'>
 									<a href='#'>
-										<i class='uil uil-search'></i>
+										<i className='uil uil-search'></i>
 									</a>
 									<input
 										type='text'
 										name='input-search'
-										class='search'
+										className='search'
 										placeholder='Buscar productos...'
 									/>
 								</div>

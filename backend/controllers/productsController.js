@@ -7,7 +7,9 @@ export const getProducts = catchAsyncErrors(async (req, res, next) => {
 	const products = await productModel.find();
 	res.status(200).json({
 		success: true,
-		data: products,
+		products: products,
+		productsCount: products.length,
+		
 	});
 });
 
@@ -24,7 +26,6 @@ export const newProduct = catchAsyncErrors(async (req, res, next) => {
 export const getProductById = catchAsyncErrors(async (req, res, next) => {
 	const product = await productModel.findById(req.params.id);
 	if (!product) {
-		// Si no encuentra el producto por el ID que se le pasa en la URL
 		return next(new ErrorHandler('Producto no encontrado', 404));
 	}
 

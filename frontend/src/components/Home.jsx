@@ -1,7 +1,9 @@
 import { Box, Grid } from '@chakra-ui/react';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { MetaData } from './layout/MetaData';
 import Card from './product/Card';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../actions/productActions';
 
 const product = [
 	{
@@ -34,14 +36,24 @@ const product = [
 	},
 ];
 function Home() {
+	const { products, loading, error } = useSelector(state => state.products);
+
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getProducts());
+	}, [dispatch]);
+
+
 	return (
 		<Fragment>
 			<MetaData title={'Inicio'} />
-			{/* <Box padding='10px' width='100%' maxWidth='1200px' margin='0 auto'> */}
-			<Grid templateColumns='repeat(4, 1fr)' gap={6}>
-				<Card product={product} />
-			</Grid>
-			{/* </Box> */}
+			{loading ? (
+				<h1>Loading...</h1>
+			) : (
+				<Grid templateColumns='repeat(4, 1fr)' gap={6}>
+					<Card products={products} />
+				</Grid>
+			)}
 		</Fragment>
 	);
 }
